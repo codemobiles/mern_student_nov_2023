@@ -1,11 +1,16 @@
-import React from "react";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./components/pages/LoginPage";
+import RegisterPage from "./components/pages/RegisterPage";
 
 type Props = {};
 
 export default function App({}: Props) {
-  return <div>App</div>;
-}
-
-function lek() {
-  console.log("1234");
+  return (
+    <div>
+      <Routes>
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+      </Routes>
+    </div>
+  );
 }
