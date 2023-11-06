@@ -3,8 +3,13 @@ import cmLogo from "@/assets/images/react_js_logo.jpg";
 
 type Props = {};
 
+interface User {
+  username: string;
+  password: string;
+}
+
 export default function LoginPage({}: Props) {
-  const [user, setUser] = useState<{ username: string; password: string }>({
+  const [user, setUser] = useState<User>({
     username: "lek",
     password: "1234",
   });
