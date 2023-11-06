@@ -8,15 +8,21 @@ export default function App({}: Props) {
   const tmp3: string = "Lek";
   const tmp4: boolean = false;
 
+  // let count = 0;
+  const [count, setCount] = React.useState(0);
+
   function method1() {
-    console.log("Call me why?");
+    // console.log("Call me why?");
+    // alert("Hey");
+    setCount(count + 1);
+    console.log("count: " + count);
   }
 
   return (
     <div>
       CodeMobiles {tmp1}, {tmp2}, {tmp3}, {tmp4 ? "yes" : "no"}
       <br />
-      <button onClick={() => method1()}>Call me</button>
+      <button onClick={() => method1()}>Call me {count}</button>
     </div>
   );
 }
