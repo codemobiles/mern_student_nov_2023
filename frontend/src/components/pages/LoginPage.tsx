@@ -16,7 +16,12 @@ export default function LoginPage({}: Props) {
 
   return (
     <div>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          alert(JSON.stringify(user));
+        }}
+      >
         {/* Username */}
         <label htmlFor="name">Username: </label>
         <input
