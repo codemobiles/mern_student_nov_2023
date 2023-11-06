@@ -1,5 +1,5 @@
-import { logout } from "@/store/slices/authSlice";
-import { useAppDispatch } from "@/store/store";
+// import { logout } from "@/store/slices/authSlice";
+// import { useAppDispatch } from "@/store/store";
 import { AccountCircle } from "@mui/icons-material";
 import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -41,7 +41,7 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ handleDrawerOpen, open }) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
   return (
     <AppBar position="fixed" open={open}>
@@ -89,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({ handleDrawerOpen, open }) => {
             aria-controls={menuId}
             aria-haspopup="true"
             onClick={async () => {
-              await dispatch(logout());
+              // await dispatch(logout());
               navigate("/login");
             }}
             color="inherit"
