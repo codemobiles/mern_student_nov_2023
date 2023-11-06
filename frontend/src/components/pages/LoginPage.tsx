@@ -19,12 +19,22 @@ export default function LoginPage({}: Props) {
       <form>
         {/* Username */}
         <label htmlFor="name">Username: </label>
-        <input type="text" name="username" value={user.username} />
+        <input
+          type="text"
+          name="username"
+          value={user.username}
+          onChange={(e) => setUser({ ...user, username: e.target.value })}
+        />
         <br />
 
         {/* Password */}
         <label htmlFor="name">Password: </label>
-        <input type="text" name="password" value={user.password} />
+        <input
+          type="text"
+          name="password"
+          value={user.password}
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
+        />
         <br />
 
         <button>Submit</button>
