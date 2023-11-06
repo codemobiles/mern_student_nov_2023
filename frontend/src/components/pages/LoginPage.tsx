@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import cmLogo from "@/assets/images/react_js_logo.jpg";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 type Props = {};
 
@@ -24,23 +24,32 @@ export default function LoginPage({}: Props) {
         }}
       >
         {/* Username */}
-        <label htmlFor="name">Username: </label>
+        {/* <label htmlFor="name">Username: </label>
         <input
           type="text"
           name="username"
           value={user.username}
           onChange={(e) => setUser({ ...user, username: e.target.value })}
         />
+        <br /> */}
+        <TextField
+          label="Username"
+          variant="outlined"
+          value={user.username}
+          onChange={(e) => setUser({ ...user, username: e.target.value })}
+        />
+
         <br />
 
         {/* Password */}
-        <label htmlFor="name">Password: </label>
-        <input
-          type="text"
-          name="password"
+        <TextField
+          sx={{ mt: 3, mb: 3 }}
+          label="Password"
+          variant="outlined"
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
+
         <br />
 
         <Button variant="contained" type="submit">
