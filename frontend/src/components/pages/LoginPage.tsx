@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import cmLogo from "@/assets/images/react_js_logo.jpg";
 
 type Props = {};
 
 export default function LoginPage({}: Props) {
+  const [user, setUser] = useState<{ username: string; password: string }>({});
+
   return (
     <div>
       <form>
