@@ -3,5 +3,7 @@ import React from "react";
 type Props = {};
 
 export default function App({}: Props) {
-  return <div>CodeMobiles</div>;
+  let tmp = 0;
+
+  return <div>CodeMobiles {tmp}</div>;
 }
