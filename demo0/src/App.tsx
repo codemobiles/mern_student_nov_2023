@@ -16,7 +16,7 @@ export default function App({}: Props) {
     <div>
       CodeMobiles {tmp1}, {tmp2}, {tmp3}, {tmp4 ? "yes" : "no"}
       <br />
-      <button>Call me</button>
+      <button onClick={() => method1()}>Call me</button>
     </div>
   );
 }
