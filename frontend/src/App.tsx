@@ -87,8 +87,8 @@ export default function PersistentDrawerLeft() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Header />
-      <Menu />
+      <Header open={open} handleDrawerOpen={handleDrawerOpen} />
+      <Menu open={open} handleDrawerClose={handleDrawerClose} />
       <Main open={open}>
         <DrawerHeader />
         <Typography paragraph>
