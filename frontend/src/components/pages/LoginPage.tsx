@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import cmLogo from "@/assets/images/react_js_logo.jpg";
+import { Button } from "@mui/material";
 
 type Props = {};
 
@@ -42,7 +43,19 @@ export default function LoginPage({}: Props) {
         />
         <br />
 
-        <button>Submit</button>
+        <Button variant="contained" type="submit">
+          Submit
+        </Button>
+        <Button
+          sx={{ ml: 1 }}
+          variant="outlined"
+          type="button"
+          onClick={() => {
+            setUser({ username: "", password: "" });
+          }}
+        >
+          Reset
+        </Button>
       </form>
     </div>
   );
