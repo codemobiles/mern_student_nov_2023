@@ -22,6 +22,7 @@ import Header from "./components/layouts/Header";
 import Menu from "./components/layouts/Menu";
 import LoginPage from "./components/pages/LoginPage";
 import RegisterPage from "./components/pages/RegisterPage";
+import { Route, Routes } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -93,7 +94,10 @@ export default function PersistentDrawerLeft() {
       <Menu open={open} handleDrawerClose={handleDrawerClose} />
       <Main open={open}>
         <DrawerHeader />
-        
+        <Routes>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+        </Routes>
       </Main>
     </Box>
   );
