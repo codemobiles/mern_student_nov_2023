@@ -46,6 +46,7 @@ export default function LoginPage({}: Props) {
           sx={{ mt: 3, mb: 3 }}
           label="Password"
           variant="outlined"
+          type="password"
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
