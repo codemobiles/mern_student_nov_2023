@@ -1,72 +1,100 @@
-import React, { useState } from "react";
-import cmLogo from "@/assets/images/react_js_logo.jpg";
-import { Button, TextField } from "@mui/material";
+import loginBg from "@/assets/images/bg4.jpg";
+import * as Icons from "@mui/icons-material/";
+import { Box, InputAdornment } from "@mui/material";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
-type Props = {};
+const Login = () => {
+  const classes: any = {
+    root: { display: "flex", justifyContent: "center", alignItems: "center" },
+    submitBtn: { marginTop: 4 },
+    canelBtn: { marginTop: 2 },
+  };
 
-interface User {
-  username: string;
-  password: string;
-}
-
-export default function LoginPage({}: Props) {
-  const [user, setUser] = useState<User>({
-    username: "lek",
-    password: "1234",
-  });
-
-  return (
-    <div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert(JSON.stringify(user));
-        }}
-      >
-        {/* Username */}
-        {/* <label htmlFor="name">Username: </label>
-        <input
-          type="text"
-          name="username"
-          value={user.username}
-          onChange={(e) => setUser({ ...user, username: e.target.value })}
-        />
-        <br /> */}
+  const showForm = () => {
+    return (
+      <form noValidate onSubmit={() => {}}>
         <TextField
+          variant="outlined"
+          margin="normal"
+          fullWidth
           label="Username"
-          variant="outlined"
-          value={user.username}
-          onChange={(e) => setUser({ ...user, username: e.target.value })}
-        />
-
-        <br />
-
-        {/* Password */}
-        <TextField
-          sx={{ mt: 3, mb: 3 }}
-          label="Password"
-          variant="outlined"
-          type="password"
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-        />
-
-        <br />
-
-        <Button variant="contained" type="submit">
-          Submit
-        </Button>
-        <Button
-          sx={{ ml: 1 }}
-          variant="outlined"
-          type="button"
-          onClick={() => {
-            setUser({ username: "", password: "" });
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Icons.Email />
+              </InputAdornment>
+            ),
           }}
+          autoComplete="email"
+          autoFocus
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Icons.Password />
+              </InputAdornment>
+            ),
+          }}
+          label="Password"
+          type="password"
+        />
+
+        <Button
+          sx={classes.submitBtn}
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
         >
-          Reset
+          Login
+        </Button>
+
+        <Button
+          onClick={() => {}}
+          type="button"
+          fullWidth
+          variant="outlined"
+          className="border-dashed border-1 border-gray-300 mt-4"
+          color="primary"
+        >
+          Register
         </Button>
       </form>
-    </div>
+    );
+  };
+
+  return (
+    <Box className="flex justify-center items-center">
+      <Card className="max-w-[345px]">
+        <CardContent>
+          <Typography gutterBottom variant="h5">
+            Login
+          </Typography>
+          {showForm()}
+        </CardContent>
+      </Card>
+      <style>
+        {`
+          body {
+            min-height: 100vh;
+            position: relative;
+            margin: 0;
+            background-size: cover;
+            background-image: url(${loginBg});
+            text-align: center;
+          }
+        `}
+      </style>
+    </Box>
   );
-}
+};
+
+export default Login;
