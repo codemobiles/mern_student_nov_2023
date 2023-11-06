@@ -59,7 +59,8 @@ const Header: React.FC<HeaderProps> = ({ handleDrawerOpen, open }) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap component="div">
-          cmPOS - MERN STACK WORKSHOP V.{import.meta.env.VITE_VERSION}
+          {import.meta.env.VITE_APP_NAME} - MERN STACK WORKSHOP V.
+          {import.meta.env.VITE_VERSION}
         </Typography>
 
         <Box className="grow" />
