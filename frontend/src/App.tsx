@@ -3,7 +3,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Header from "./components/layouts/Header";
+import Header from "@/components/layouts/Header";
 import Menu from "./components/layouts/Menu";
 import LoginPage from "./components/pages/LoginPage";
 import RegisterPage from "./components/pages/RegisterPage";
