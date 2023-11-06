@@ -6,7 +6,19 @@ type Props = {};
 export default function LoginPage({}: Props) {
   return (
     <div>
-      <div className="text-red-700">LoginPage</div>
+      <form>
+        {/* Username */}
+        <label htmlFor="name">Username: </label>
+        <input type="text" name="username" />
+        <br />
+
+        {/* Password */}
+        <label htmlFor="name">Password: </label>
+        <input type="text" name="password" />
+        <br />
+
+        <button>Submit</button>
+      </form>
     </div>
   );
 }
