@@ -4,19 +4,22 @@ import cmLogo from "@/assets/images/react_js_logo.jpg";
 type Props = {};
 
 export default function LoginPage({}: Props) {
-  const [user, setUser] = useState<{ username: string; password: string }>({});
+  const [user, setUser] = useState<{ username: string; password: string }>({
+    username: "lek",
+    password: "1234",
+  });
 
   return (
     <div>
       <form>
         {/* Username */}
         <label htmlFor="name">Username: </label>
-        <input type="text" name="username" />
+        <input type="text" name="username" value={user.username} />
         <br />
 
         {/* Password */}
         <label htmlFor="name">Password: </label>
-        <input type="text" name="password" />
+        <input type="text" name="password" value={user.password} />
         <br />
 
         <button>Submit</button>
