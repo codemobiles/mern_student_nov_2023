@@ -34,7 +34,7 @@ type Props = {
   handleDrawerOpen: () => void;
 };
 
-export default function Header(props: Props) {
+export default function Header({ open, handleDrawerOpen }: Props) {
   return (
     <AppBar position="fixed" open={open}>
       <Toolbar>
