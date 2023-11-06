@@ -6,8 +6,7 @@ type Props = {};
 export default function LoginPage({}: Props) {
   return (
     <div>
-      LoginPage
-      <img src={cmLogo} alt="" />
+      <div className="text-red-700">LoginPage</div>
     </div>
   );
 }
