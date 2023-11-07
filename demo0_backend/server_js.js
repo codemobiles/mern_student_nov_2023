@@ -1,8 +1,8 @@
-// const tmp1 = "lek";
-// const tmp2 = 1234;
-// let tmp3 = "kan";
+const express = require("express");
+const app = express();
 
-// console.log(tmp1);
-// console.log(tmp3);
-// tmp3 = 1234;
-// console.log(tmp3);
+app.get("/", (req, res) => {
+  res.json({ result: "ok" });
+});
+
+app.listen(8085, () => console.log("Server is  running..."));
