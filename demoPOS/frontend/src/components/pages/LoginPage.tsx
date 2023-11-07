@@ -26,7 +26,7 @@ const formValidateSchema = Yup.object().shape({
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const authReducer = useSelector((state: RootState) => state.authReducer);
+  const authReducer = useSelector(authSelector);
 
   const classes: any = {
     root: { display: "flex", justifyContent: "center", alignItems: "center" },
