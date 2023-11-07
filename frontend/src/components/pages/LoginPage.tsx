@@ -27,7 +27,12 @@ const Login = () => {
 
   const showForm = () => {
     return (
-      <form noValidate onSubmit={() => {}}>
+      <form
+        noValidate
+        onSubmit={handleSubmit((values) => {
+          alert(JSON.stringify(values));
+        })}
+      >
         {/* Username */}
         <Controller
           control={control}
