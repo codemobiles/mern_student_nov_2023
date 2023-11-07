@@ -8,6 +8,11 @@ const authSlice = createSlice({
       // do something..
       state.count++;
     },
+
+    remove: (state) => {
+      // do something..
+      state.count--;
+    },
   },
   initialState: { count: 0 },
 });
