@@ -11,8 +11,9 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import store from "@/store/store";
+import store, { RootState } from "@/store/store";
 import { add } from "@/store/slices/authSlice";
+import { useSelector } from "react-redux";
 
 const formValidateSchema = Yup.object().shape({
   // username: Yup.string().email("Invalid email address").required("Email is required").trim(),
@@ -25,6 +26,7 @@ const formValidateSchema = Yup.object().shape({
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const authReducer = useSelector((state: RootState) => state.authReducer);
 
   const classes: any = {
     root: { display: "flex", justifyContent: "center", alignItems: "center" },
