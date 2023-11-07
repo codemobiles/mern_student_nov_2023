@@ -11,4 +11,5 @@ const authSlice = createSlice({
   initialState: { count: 0 },
 });
 
+export const { add } = authSlice.actions;
 export default authSlice.reducer;
