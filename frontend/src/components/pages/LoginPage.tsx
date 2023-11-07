@@ -82,6 +82,8 @@ const Login = () => {
           render={({ field }) => (
             <TextField
               {...field}
+              error={Boolean(errors.password)}
+              helperText={errors.password?.message}
               variant="outlined"
               margin="normal"
               fullWidth
