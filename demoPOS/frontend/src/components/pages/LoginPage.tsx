@@ -11,6 +11,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import store from "@/store/store";
 
 const formValidateSchema = Yup.object().shape({
   // username: Yup.string().email("Invalid email address").required("Email is required").trim(),
@@ -132,7 +133,7 @@ const LoginPage = () => {
       <Card className="max-w-[345px]">
         <CardContent>
           <Typography gutterBottom variant="h5">
-            Login
+            Login {store.getState().authReducer.count}
           </Typography>
           {showForm()}
         </CardContent>
