@@ -53,9 +53,14 @@ const LoginPage = () => {
     return (
       <form
         noValidate
-        onSubmit={handleSubmit((values) => {
+        onSubmit={handleSubmit(async (values) => {
           // alert(JSON.stringify(values));
-          dispatch(login(values));
+          const result = await dispatch(login(values));
+          if (result.meta.requestStatus == "fulfilled") {
+            alert("Success");
+          } else {
+            alert("Failed");
+          }
         })}
       >
         {/* Username */}
