@@ -6,8 +6,19 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { User, UserType } from "@/types/user.type";
+import { User } from "@/types/user.type";
 import { Controller, useForm } from "react-hook-form";
+
+import * as Yup from "yup";
+
+const formValidateSchema = Yup.object().shape({
+  // username: Yup.string().email("Invalid email address").required("Email is required").trim(),
+  username: Yup.string()
+    .min(4)
+    .required("Username must be more than 3 letters")
+    .trim(),
+  password: Yup.string().required("Password is required").trim(),
+});
 
 const Login = () => {
   const classes: any = {
