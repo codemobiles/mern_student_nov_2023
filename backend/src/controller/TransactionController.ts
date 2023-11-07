@@ -1,2 +1,2 @@
 import { NextFunction, Request, Response } from "express";
-export class UserController {}
+export class TransactionController {}
