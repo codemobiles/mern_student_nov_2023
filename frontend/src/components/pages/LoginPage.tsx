@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { User } from "@/types/user.type";
 import { Controller, useForm } from "react-hook-form";
-
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 const formValidateSchema = Yup.object().shape({
@@ -34,6 +34,7 @@ const Login = () => {
 
   const { control, handleSubmit } = useForm<User>({
     defaultValues: initialValue,
+    resolver: yupResolver(formValidateSchema),
   });
 
   const showForm = () => {
