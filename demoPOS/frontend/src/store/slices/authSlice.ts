@@ -5,7 +5,9 @@ import axios from "axios";
 
 export const login = createAsyncThunk("auth/login", async (values: User) => {
   const result = await axios.post("http://localhost:8081/api/v2/login", values);
-
+  if (result.data.result != "ok") {
+    throw Error();
+  }
   return result.data;
 });
 
