@@ -32,7 +32,11 @@ const Login = () => {
     password: "1234",
   };
 
-  const { control, handleSubmit } = useForm<User>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<User>({
     defaultValues: initialValue,
     resolver: yupResolver(formValidateSchema),
   });
@@ -52,8 +56,8 @@ const Login = () => {
           render={({ field }) => (
             <TextField
               {...field}
-              error
-              helperText="Invalid Username"
+              error={Boolean(errors.username)}
+              helperText={errors.username?.message}
               variant="outlined"
               margin="normal"
               fullWidth
