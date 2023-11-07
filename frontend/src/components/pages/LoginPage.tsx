@@ -32,8 +32,9 @@ const Login = () => {
         <Controller
           control={control}
           name="username"
-          render={(object) => (
+          render={({ field }) => (
             <TextField
+              {...field}
               variant="outlined"
               margin="normal"
               fullWidth
