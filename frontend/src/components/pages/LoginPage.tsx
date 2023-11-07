@@ -52,19 +52,27 @@ const Login = () => {
           )}
         />
 
-        <TextField
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Icons.Password />
-              </InputAdornment>
-            ),
-          }}
-          label="Password"
-          type="password"
+        {/* Password */}
+        <Controller
+          control={control}
+          name="password"
+          render={({ field }) => (
+            <TextField
+              {...field}
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Icons.Password />
+                  </InputAdornment>
+                ),
+              }}
+              label="Password"
+              type="password"
+            />
+          )}
         />
 
         <Button
