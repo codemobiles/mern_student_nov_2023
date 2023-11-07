@@ -14,6 +14,15 @@ const Login = () => {
     canelBtn: { marginTop: 2 },
   };
 
+  const initialValue: User = { username: "admin", password: "1234" };
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<User>({
+    defaultValues: initialValue,
+  });
+
   const showForm = () => {
     return (
       <form noValidate onSubmit={() => {}}>
