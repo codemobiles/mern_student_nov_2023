@@ -8,12 +8,9 @@ export default function App({}: Props) {
   const tmp3: string = "Lek";
   const tmp4: boolean = false;
 
-  // let count = 0;
   const [count, setCount] = React.useState(0);
 
   function method1() {
-    // console.log("Call me why?");
-    // alert("Hey");
     setCount(count + 1);
     console.log("count: " + count);
   }
