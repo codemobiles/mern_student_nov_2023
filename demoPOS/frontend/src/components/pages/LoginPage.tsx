@@ -141,7 +141,7 @@ const LoginPage = () => {
                 store.dispatch(add());
               }}
             >
-              Login {store.getState().authReducer.count}
+              Login {authReducer.count}
             </div>
           </Typography>
           {showForm()}
