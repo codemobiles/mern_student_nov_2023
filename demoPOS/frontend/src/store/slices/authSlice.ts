@@ -4,10 +4,7 @@ import { User } from "@/types/user.type";
 import axios from "axios";
 
 export const login = createAsyncThunk("auth/login", async (values: User) => {
-  const result = await axios.post(
-    "http://localhost:8081/api/v2/register",
-    values
-  );
+  const result = await axios.post("http://localhost:8081/api/v2/login", values);
 
   return result.data;
 });

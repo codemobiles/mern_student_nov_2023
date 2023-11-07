@@ -12,7 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import store, { RootState, useAppDispatch } from "@/store/store";
-import { add, authSelector } from "@/store/slices/authSlice";
+import { add, authSelector, login } from "@/store/slices/authSlice";
 import { useSelector } from "react-redux";
 
 const formValidateSchema = Yup.object().shape({
@@ -54,7 +54,8 @@ const LoginPage = () => {
       <form
         noValidate
         onSubmit={handleSubmit((values) => {
-          alert(JSON.stringify(values));
+          // alert(JSON.stringify(values));
+          dispatch(login(values));
         })}
       >
         {/* Username */}
