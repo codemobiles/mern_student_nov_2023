@@ -11,8 +11,8 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import store, { RootState } from "@/store/store";
-import { add } from "@/store/slices/authSlice";
+import store, { RootState, useAppDispatch } from "@/store/store";
+import { add, authSelector } from "@/store/slices/authSlice";
 import { useSelector } from "react-redux";
 
 const formValidateSchema = Yup.object().shape({
@@ -27,6 +27,7 @@ const formValidateSchema = Yup.object().shape({
 const LoginPage = () => {
   const navigate = useNavigate();
   const authReducer = useSelector(authSelector);
+  const dispatch = useAppDispatch();
 
   const classes: any = {
     root: { display: "flex", justifyContent: "center", alignItems: "center" },
@@ -136,13 +137,7 @@ const LoginPage = () => {
       <Card className="max-w-[345px]">
         <CardContent>
           <Typography gutterBottom variant="h5">
-            <div
-              onClick={() => {
-                store.dispatch(add());
-              }}
-            >
-              Login {authReducer.count}
-            </div>
+            <div onClick={() => dispatch(add())}>Login {authReducer.count}</div>
           </Typography>
           {showForm()}
         </CardContent>
