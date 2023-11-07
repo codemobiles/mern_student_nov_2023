@@ -21,7 +21,7 @@ const formValidateSchema = Yup.object().shape({
   password: Yup.string().required("Password is required").trim(),
 });
 
-const Login = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
 
   const classes: any = {
@@ -153,4 +153,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
