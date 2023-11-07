@@ -23,7 +23,29 @@ export class UserController {
 
   async login(req: Request, res: Response, next: NextFunction) {
     try {
-      return { result: "ok 1234", messsage: "login" };
+      const { username, password } = req.body;
+
+      let doc = await this.userRepository.findOne({
+        where: { username },
+      });
+
+      if (doc) {
+        let isPasswordValid = await bcrypt.compare(password, doc.password);
+        if (isPasswordValid) {
+          const payload = {
+            id: doc._id,
+            level: doc.level,
+            username: doc.username,
+          };
+          let token = "1234";
+
+          return { result: "ok", token, message: "success" };
+        } else {
+          return { result: "nok", message: "invalid password" };
+        }
+      } else {
+        return { result: "nok", message: "invalid username" };
+      }
     } catch (e) {
       return { result: "nok", message: "invalid data" };
     }
