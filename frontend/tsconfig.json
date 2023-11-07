@@ -18,7 +18,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/components/*": ["components/*"],
-      "@/assets/*": ["assets/*"]
+      "@/assets/*": ["assets/*"],
+      "@/types/*": ["types/*"]
     },
 
     /* Linting */

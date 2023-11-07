@@ -6,6 +6,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { User, UserType } from "@/types/user.type";
+import { Controller, useForm } from "react-hook-form";
 
 const Login = () => {
   const classes: any = {
@@ -14,33 +16,41 @@ const Login = () => {
     canelBtn: { marginTop: 2 },
   };
 
-  const initialValue: User = { username: "admin", password: "1234" };
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<User>({
+  const initialValue: User = {
+    username: "admin",
+    password: "1234",
+  };
+
+  const { control, handleSubmit } = useForm<User>({
     defaultValues: initialValue,
   });
 
   const showForm = () => {
     return (
       <form noValidate onSubmit={() => {}}>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          label="Username"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Icons.Email />
-              </InputAdornment>
-            ),
-          }}
-          autoComplete="email"
-          autoFocus
+        {/* Username */}
+        <Controller
+          control={control}
+          name="username"
+          render={(object) => (
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              label="Username"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Icons.Email />
+                  </InputAdornment>
+                ),
+              }}
+              autoComplete="email"
+              autoFocus
+            />
+          )}
         />
+
         <TextField
           variant="outlined"
           margin="normal"
