@@ -1,4 +1,6 @@
 import { Product } from "@/types/product.type";
+import { httpClient } from "@/utils/HttpClient";
+import { server } from "@/utils/constants";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface StockState {
@@ -9,6 +11,18 @@ export interface StockState {
 const initialState: StockState = {
   stockAllResult: [],
   stockOneResult: null,
+};
+
+export const getProducts = async (keyword: string) => {
+  if (keyword) {
+    const result = await httpClient.get<Product[]>(
+      `${server.PRODUCT_URL}/name/${keyword}`
+    );
+    return result.data;
+  } else {
+    const result = await httpClient.get(server.PRODUCT_URL);
+    return result.data;
+  }
 };
 
 const stockSlice = createSlice({
