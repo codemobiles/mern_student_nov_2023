@@ -3,6 +3,7 @@ import { RootState } from "../store";
 import { User } from "@/types/user.type";
 import { LoginResult, RegisterResult } from "@/types/auth-result.type";
 import { httpClient } from "@/utils/HttpClient";
+import { server } from "@/utils/constants";
 
 export interface AuthState {
   loginResult?: LoginResult;
@@ -24,7 +25,7 @@ export const login = createAsyncThunk("auth/login", async (values: User) => {
   // Simulate delay
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const result = await httpClient.post<LoginResult>("/login", values);
+  const result = await httpClient.post<LoginResult>(server.LOGIN_URL, values);
   if (result.data.result != "ok") {
     throw Error();
   }
