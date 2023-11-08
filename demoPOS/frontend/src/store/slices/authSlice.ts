@@ -72,5 +72,5 @@ const authSlice = createSlice({
 });
 
 export const authSelector = (state: RootState) => state.authReducer;
-export const { add, remove } = authSlice.actions;
+export const { add, remove, setAuthenticating } = authSlice.actions;
 export default authSlice.reducer;
