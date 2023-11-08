@@ -12,7 +12,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/store/store";
-import { add, authSelector, login } from "@/store/slices/authSlice";
+import {
+  add,
+  authSelector,
+  login,
+  setAuthenticating,
+} from "@/store/slices/authSlice";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
