@@ -10,8 +10,15 @@ export default function StockPage({}: Props) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    // onCreated
+    console.log("Stock was created");
     dispatch(getProducts());
-  }, []);
+
+    return () => {
+      // onDestroy
+      console.log("Stock was destoryed");
+    };
+  }, [dispatch]);
 
   return <div>StockPage</div>;
 }
