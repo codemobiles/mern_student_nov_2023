@@ -15,9 +15,10 @@ import StockEditPage from "./components/pages/StockEditPage";
 import StockPage from "./components/pages/StockPage";
 import TransactionPage from "./components/pages/TransactionPage";
 import { useSelector } from "react-redux";
-import { authSelector } from "./store/slices/authSlice";
+import { authSelector, relogin } from "./store/slices/authSlice";
 import PublicRoutes from "@/router/public.routes";
 import ProtectedRoutes from "@/router/protected.routes";
+import { useAppDispatch } from "./store/store";
 
 const drawerWidth = 240;
 
@@ -74,6 +75,7 @@ export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const authReducer = useSelector(authSelector);
+  const dispatch = useAppDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -82,6 +84,12 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  // restore session
+  React.useEffect(() => {
+    // on created
+    dispatch(relogin());
+  }, [dispatch]);
 
   return (
     <Box sx={{ display: "flex" }}>
