@@ -66,6 +66,17 @@ export default function StockPage() {
         );
       },
     },
+    {
+      headerName: "TIME",
+      field: "created",
+      width: 120,
+      renderCell: ({ value }) => (
+        <Typography variant="body1">
+          {/* 543 diff thai years */}
+          {dayjs(value).locale("th").add(543, "year").format("DD/MMM/YYYY")}
+        </Typography>
+      ),
+    },
   ];
 
   React.useEffect(() => {
