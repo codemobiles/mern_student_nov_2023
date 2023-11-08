@@ -1,6 +1,6 @@
 import loginBg from "@/assets/images/bg4.jpg";
 import * as Icons from "@mui/icons-material/";
-import { Box, InputAdornment } from "@mui/material";
+import { Alert, Box, InputAdornment } from "@mui/material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -28,7 +28,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const authReducer = useSelector(authSelector);
   const dispatch = useAppDispatch();
-  
 
   const classes: any = {
     root: { display: "flex", justifyContent: "center", alignItems: "center" },
@@ -55,12 +54,9 @@ const LoginPage = () => {
       <form
         noValidate
         onSubmit={handleSubmit(async (values) => {
-          // alert(JSON.stringify(values));
           const result = await dispatch(login(values));
           if (result.meta.requestStatus == "fulfilled") {
             alert("Success");
-          } else {
-            alert("Failed");
           }
         })}
       >
@@ -114,6 +110,8 @@ const LoginPage = () => {
             />
           )}
         />
+
+        <Alert severity="error">Login failed</Alert>
 
         <Button
           sx={classes.submitBtn}
