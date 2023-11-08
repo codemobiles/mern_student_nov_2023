@@ -43,6 +43,10 @@ const authSlice = createSlice({
       // do something..
       state.count--;
     },
+
+    setAuthenticating: (state, action) => {
+      state.isAuthenticating = action.payload;
+    },
   },
   extraReducers: (builder) => {
     // login success
