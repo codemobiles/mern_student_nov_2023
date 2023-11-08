@@ -3,6 +3,9 @@ import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { stockSelector, getProducts } from "@/store/slices/stockSlice";
 import { useAppDispatch } from "@/store/store";
 import { useSelector } from "react-redux";
+import dayjs from "dayjs";
+import { NumericFormat } from "react-number-format";
+import { Typography } from "@mui/material";
 
 export default function StockPage() {
   const stockReducer = useSelector(stockSelector);
@@ -26,8 +29,43 @@ export default function StockPage() {
     },
 
     { field: "name", headerName: "Name", width: 330 },
-    { field: "stock", headerName: "Stock", width: 130 },
-    { field: "price", headerName: "Price", width: 130 },
+    {
+      field: "stock",
+      headerName: "Stock",
+      width: 130,
+      renderCell({ value }) {
+        return (
+          <Typography variant="body1">
+            <NumericFormat
+              value={value}
+              displayType={"text"}
+              thousandSeparator={true}
+              decimalScale={0}
+              fixedDecimalScale={true}
+            />
+          </Typography>
+        );
+      },
+    },
+    {
+      field: "price",
+      headerName: "Price",
+      width: 130,
+      renderCell({ value }) {
+        return (
+          <Typography variant="body1">
+            <NumericFormat
+              value={value}
+              displayType={"text"}
+              thousandSeparator={true}
+              decimalScale={2}
+              fixedDecimalScale={true}
+              suffix=" ฿"
+            />
+          </Typography>
+        );
+      },
+    },
   ];
 
   React.useEffect(() => {
@@ -53,7 +91,6 @@ export default function StockPage() {
           },
         }}
         pageSizeOptions={[5, 10]}
-        checkboxSelection
       />
     </div>
   );
