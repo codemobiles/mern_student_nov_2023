@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Products } from "../entity/Products";
+import { Products, cloneProduct } from "../entity/Products";
 import { AppDataSource } from "../data-source";
 import formidable = require("formidable");
 import { firstValues } from "formidable/src/helpers/firstValues.js";
