@@ -1,37 +1,3 @@
-// import { getProducts, stockSelector } from "@/store/slices/stockSlice";
-// import { useAppDispatch } from "@/store/store";
-// import React, { useEffect } from "react";
-// import { useSelector } from "react-redux";
-
-// type Props = {};
-
-// export default function StockPage({}: Props) {
-//   const stockReducer = useSelector(stockSelector);
-//   const dispatch = useAppDispatch();
-
-//   useEffect(() => {
-//     // onCreated
-//     console.log("Stock was created");
-//     dispatch(getProducts());
-
-//     return () => {
-//       // onDestroy
-//       console.log("Stock was destoryed");
-//     };
-//   }, [dispatch]);
-
-//   return (
-//     <div>
-//       StockPage
-//       <ul>
-//         {stockReducer.stockAllResult.map((e) => (
-//           <li key={e._id}>{e.name}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
-
 import * as React from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { stockSelector, getProducts } from "@/store/slices/stockSlice";
@@ -44,6 +10,20 @@ export default function StockPage() {
 
   const columns: GridColDef[] = [
     { field: "product_id", headerName: "ID", width: 70 },
+    {
+      field: "image",
+      headerName: "Image",
+      width: 100,
+      renderCell({ value }) {
+        return (
+          <img
+            src={"http://localhost:8081/images/" + value}
+            className="w-[50px]"
+          />
+        );
+      },
+    },
+
     { field: "name", headerName: "Name", width: 330 },
     { field: "stock", headerName: "Stock", width: 130 },
     { field: "price", headerName: "Price", width: 130 },
