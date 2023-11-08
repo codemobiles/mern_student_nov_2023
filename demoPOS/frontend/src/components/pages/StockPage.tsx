@@ -20,5 +20,14 @@ export default function StockPage({}: Props) {
     };
   }, [dispatch]);
 
-  return <div>StockPage</div>;
+  return (
+    <div>
+      StockPage
+      <ul>
+        <li>xxx</li>
+        <li>xxx</li>
+        <li>xxx</li>
+      </ul>
+    </div>
+  );
 }
