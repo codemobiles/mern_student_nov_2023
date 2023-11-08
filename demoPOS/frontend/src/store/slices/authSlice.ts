@@ -59,6 +59,10 @@ const authSlice = createSlice({
       state.isAuthenticating = false;
       state.isError = true;
     });
+
+    builder.addCase(login.pending, (state) => {
+      state.isAuthenticating = true;
+    });
   },
   initialState,
 });

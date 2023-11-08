@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/store/store";
 import { add, authSelector, login } from "@/store/slices/authSlice";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const formValidateSchema = Yup.object().shape({
   // username: Yup.string().email("Invalid email address").required("Email is required").trim(),
@@ -29,9 +30,13 @@ const LoginPage = () => {
   const authReducer = useSelector(authSelector);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(setAuthenticating(false));
+  }, [dispatch]);
+
   const classes: any = {
     root: { display: "flex", justifyContent: "center", alignItems: "center" },
-    submitBtn: { marginTop: 4 },
+    submitBtn: { marginTop: 4, marginBottom: 1 },
     canelBtn: { marginTop: 2 },
   };
 
@@ -119,6 +124,7 @@ const LoginPage = () => {
           fullWidth
           variant="contained"
           color="primary"
+          disabled={authReducer.isAuthenticating}
         >
           Login
         </Button>
