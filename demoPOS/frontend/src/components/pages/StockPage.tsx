@@ -44,7 +44,9 @@ export default function StockPage() {
 
   const columns: GridColDef[] = [
     { field: "product_id", headerName: "ID", width: 70 },
-    { field: "name", headerName: "Name", width: 130 },
+    { field: "name", headerName: "Name", width: 330 },
+    { field: "stock", headerName: "Stock", width: 130 },
+    { field: "price", headerName: "Price", width: 130 },
   ];
 
   React.useEffect(() => {
