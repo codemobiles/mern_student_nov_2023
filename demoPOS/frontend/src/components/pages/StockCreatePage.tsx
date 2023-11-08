@@ -59,36 +59,57 @@ const StockCreate = () => {
               Create Product
             </Typography>
 
-            <TextField
-              label="Name"
-              error={Boolean(errors.name?.message)}
-              helperText={errors.name?.message?.toString()}
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              autoFocus
+            <Controller
+              control={control}
+              name="name"
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Name"
+                  error={Boolean(errors.name?.message)}
+                  helperText={errors.name?.message?.toString()}
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  autoFocus
+                />
+              )}
             />
 
-            <TextField
-              label="Price"
-              type="number"
-              error={Boolean(errors.price?.message)}
-              helperText={errors.price?.message?.toString()}
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              autoFocus
+            <Controller
+              control={control}
+              name="price"
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Price"
+                  type="number"
+                  error={Boolean(errors.price?.message)}
+                  helperText={errors.price?.message?.toString()}
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  autoFocus
+                />
+              )}
             />
 
-            <TextField
-              type="number"
-              label="Stock"
-              error={Boolean(errors.stock?.message)}
-              helperText={errors.stock?.message?.toString()}
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              autoFocus
+            <Controller
+              control={control}
+              name="stock"
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  type="number"
+                  label="Stock"
+                  error={Boolean(errors.stock?.message)}
+                  helperText={errors.stock?.message?.toString()}
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  autoFocus
+                />
+              )}
             />
 
             <Box>{showPreviewImage()}</Box>
