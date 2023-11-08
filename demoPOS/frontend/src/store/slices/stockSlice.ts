@@ -16,7 +16,7 @@ const initialState: StockState = {
 
 export const getProducts = createAsyncThunk(
   "stock/getProducts",
-  async (keyword: string) => {
+  async (keyword: string | undefined) => {
     if (keyword) {
       const result = await httpClient.get<Product[]>(
         `${server.PRODUCT_URL}/name/${keyword}`
