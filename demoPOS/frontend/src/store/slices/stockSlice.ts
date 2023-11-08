@@ -22,7 +22,7 @@ export const getProducts = createAsyncThunk(
       );
       return result.data;
     } else {
-      const result = await httpClient.get(server.PRODUCT_URL);
+      const result = await httpClient.get<Product[]>(server.PRODUCT_URL);
       return result.data;
     }
   }
@@ -32,7 +32,11 @@ const stockSlice = createSlice({
   name: "stock",
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(getProducts.fulfilled, (state, action) => {
+      state.stockAllResult = action.payload;
+    });
+  },
 });
 
 export default stockSlice.reducer;
