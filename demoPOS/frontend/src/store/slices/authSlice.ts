@@ -21,16 +21,30 @@ const initialState: AuthState = {
   count: 0,
 };
 
-export const login = createAsyncThunk("auth/login", async (values: User) => {
-  // Simulate delay
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+export const login = createAsyncThunk("auth/login", async (value: User) => {
+  const result = await httpClient.post<LoginResult>(server.LOGIN_URL, value);
+  if (result.data.result === "ok") {
+    const { token } = result.data;
+    localStorage.setItem(server.TOKEN_KEY, token);
+    return result.data;
+  }
+  throw Error();
+});
 
-  const result = await httpClient.post<LoginResult>(server.LOGIN_URL, values);
-  if (result.data.result != "ok") {
+export const register = createAsyncThunk(
+  "auth/register",
+  async (value: User) => {
+    const result = await httpClient.post<RegisterResult>(
+      server.REGISTER_URL,
+      value
+    );
+    if (result.data.result === "ok") {
+      return result.data;
+    }
+
     throw Error();
   }
-  return result.data;
-});
+);
 
 const authSlice = createSlice({
   name: "auth",
