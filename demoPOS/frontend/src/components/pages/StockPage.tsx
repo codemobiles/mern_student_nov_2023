@@ -38,14 +38,14 @@ import { stockSelector, getProducts } from "@/store/slices/stockSlice";
 import { useAppDispatch } from "@/store/store";
 import { useSelector } from "react-redux";
 
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-];
-
-export default function DataTable() {
+export default function StockPage() {
   const stockReducer = useSelector(stockSelector);
   const dispatch = useAppDispatch();
+
+  const columns: GridColDef[] = [
+    { field: "product_id", headerName: "ID", width: 70 },
+    { field: "name", headerName: "Name", width: 130 },
+  ];
 
   React.useEffect(() => {
     // onCreated
@@ -61,7 +61,8 @@ export default function DataTable() {
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={stockRe}
+        getRowId={(row) => row.product_id}
+        rows={stockReducer.stockAllResult}
         columns={columns}
         initialState={{
           pagination: {
