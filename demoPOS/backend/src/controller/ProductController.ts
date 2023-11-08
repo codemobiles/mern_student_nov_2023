@@ -5,5 +5,7 @@ import { AppDataSource } from "../data-source";
 export class ProductController {
   private productRepository = AppDataSource.getMongoRepository(Products);
 
-  async all(req: Request, res: Response, next: NextFunction) {}
+  async all(req: Request, res: Response, next: NextFunction) {
+    return this.productRepository.find({ order: { created: "DESC" } });
+  }
 }
