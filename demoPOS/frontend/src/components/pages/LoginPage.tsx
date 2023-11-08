@@ -111,7 +111,7 @@ const LoginPage = () => {
           )}
         />
 
-        <Alert severity="error">Login failed</Alert>
+        {authReducer.isError && <Alert severity="error">Login failed</Alert>}
 
         <Button
           sx={classes.submitBtn}
