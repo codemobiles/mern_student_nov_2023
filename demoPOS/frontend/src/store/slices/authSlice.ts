@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { User } from "@/types/user.type";
-import axios from "axios";
 import { LoginResult, RegisterResult } from "@/types/auth-result.type";
+import { httpClient } from "@/utils/HttpClient";
 
 export interface AuthState {
   loginResult?: LoginResult;
@@ -24,10 +24,7 @@ export const login = createAsyncThunk("auth/login", async (values: User) => {
   // Simulate delay
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const result = await axios.post<LoginResult>(
-    "http://localhost:8081/api/v2/login",
-    values
-  );
+  const result = await httpClient.post<LoginResult>("/login", values);
   if (result.data.result != "ok") {
     throw Error();
   }
