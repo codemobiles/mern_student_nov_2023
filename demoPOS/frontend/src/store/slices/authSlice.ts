@@ -21,6 +21,9 @@ const initialState: AuthState = {
 };
 
 export const login = createAsyncThunk("auth/login", async (values: User) => {
+  // Simulate delay
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const result = await axios.post<LoginResult>(
     "http://localhost:8081/api/v2/login",
     values
