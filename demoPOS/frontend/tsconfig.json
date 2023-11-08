@@ -21,7 +21,8 @@
       "@/assets/*": ["assets/*"],
       "@/types/*": ["types/*"],
       "@/store/*": ["store/*"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/router/*": ["router/*"]
     },
 
     /* Linting */

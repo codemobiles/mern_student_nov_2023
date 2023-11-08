@@ -16,8 +16,8 @@ import StockPage from "./components/pages/StockPage";
 import TransactionPage from "./components/pages/TransactionPage";
 import { useSelector } from "react-redux";
 import { authSelector } from "./store/slices/authSlice";
-import PublicRoutes from "router/public.routes";
-import ProtectedRoutes from "router/protected.routes";
+import PublicRoutes from "@/router/public.routes";
+import ProtectedRoutes from "@/router/protected.routes";
 
 const drawerWidth = 240;
 
