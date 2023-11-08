@@ -100,35 +100,40 @@ export default function PersistentDrawerLeft() {
       {authReducer.isAuthented && (
         <Menu open={open} handleDrawerClose={handleDrawerClose} />
       )}
-      <Main open={open}>
-        <DrawerHeader />
-        <Routes>
-          {/** Wrap all Route under PublicRoutes element */}
-          <Route
-            path="/"
-            element={<PublicRoutes isAuthented={authReducer.isAuthented} />}
-          >
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="*" element={<Navigate to="/login" />} />
-          </Route>
-          {/* Protected routes */}
-          <Route
-            path="/"
-            element={<ProtectedRoutes isAuthented={authReducer.isAuthented} />}
-          >
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/stock" element={<StockPage />} />
-            <Route path="/report" element={<ReportPage />} />
-            <Route path="/stock/create" element={<StockCreatePage />} />
-            <Route path="/stock/edit/:id" element={<StockEditPage />} />
-            <Route path="/report" element={<ReportPage />} />
-            <Route path="/transaction" element={<TransactionPage />} />
-            {/* <Route path="/chartjs" element={<ChartJSFaker />} /> */}
-          </Route>
-        </Routes>
-      </Main>
+
+      {!authReducer.isAuthenticating && (
+        <Main open={open}>
+          <DrawerHeader />
+          <Routes>
+            {/** Wrap all Route under PublicRoutes element */}
+            <Route
+              path="/"
+              element={<PublicRoutes isAuthented={authReducer.isAuthented} />}
+            >
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/" element={<Navigate to="/login" />} />
+              <Route path="*" element={<Navigate to="/login" />} />
+            </Route>
+            {/* Protected routes */}
+            <Route
+              path="/"
+              element={
+                <ProtectedRoutes isAuthented={authReducer.isAuthented} />
+              }
+            >
+              <Route path="/shop" element={<ShopPage />} />
+              <Route path="/stock" element={<StockPage />} />
+              <Route path="/report" element={<ReportPage />} />
+              <Route path="/stock/create" element={<StockCreatePage />} />
+              <Route path="/stock/edit/:id" element={<StockEditPage />} />
+              <Route path="/report" element={<ReportPage />} />
+              <Route path="/transaction" element={<TransactionPage />} />
+              {/* <Route path="/chartjs" element={<ChartJSFaker />} /> */}
+            </Route>
+          </Routes>
+        </Main>
+      )}
     </Box>
   );
 }
