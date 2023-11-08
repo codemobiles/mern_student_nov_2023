@@ -16,6 +16,8 @@ import StockPage from "./components/pages/StockPage";
 import TransactionPage from "./components/pages/TransactionPage";
 import { useSelector } from "react-redux";
 import { authSelector } from "./store/slices/authSlice";
+import PublicRoutes from "router/public.routes";
+import ProtectedRoutes from "router/protected.routes";
 
 const drawerWidth = 240;
 
@@ -93,17 +95,30 @@ export default function PersistentDrawerLeft() {
       <Main open={open}>
         <DrawerHeader />
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/stock" element={<StockPage />} />
-          <Route path="/report" element={<ReportPage />} />
-          <Route path="/stock/create" element={<StockCreatePage />} />
-          <Route path="/stock/edit/:id" element={<StockEditPage />} />
-          <Route path="/report" element={<ReportPage />} />
-          <Route path="/transaction" element={<TransactionPage />} />
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="*" element={<Navigate to="/login" />} />
+          {/** Wrap all Route under PublicRoutes element */}
+          <Route
+            path="/"
+            element={<PublicRoutes isAuthented={authReducer.isAuthented} />}
+          >
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to="/login" />} />
+          </Route>
+          {/* Protected routes */}
+          <Route
+            path="/"
+            element={<ProtectedRoutes isAuthented={authReducer.isAuthented} />}
+          >
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/stock" element={<StockPage />} />
+            <Route path="/report" element={<ReportPage />} />
+            <Route path="/stock/create" element={<StockCreatePage />} />
+            <Route path="/stock/edit/:id" element={<StockEditPage />} />
+            <Route path="/report" element={<ReportPage />} />
+            <Route path="/transaction" element={<TransactionPage />} />
+            {/* <Route path="/chartjs" element={<ChartJSFaker />} /> */}
+          </Route>
         </Routes>
       </Main>
     </Box>
