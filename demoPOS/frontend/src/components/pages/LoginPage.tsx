@@ -11,7 +11,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import store, { RootState, useAppDispatch } from "@/store/store";
+import { useAppDispatch } from "@/store/store";
 import { add, authSelector, login } from "@/store/slices/authSlice";
 import { useSelector } from "react-redux";
 
@@ -56,7 +56,7 @@ const LoginPage = () => {
         onSubmit={handleSubmit(async (values) => {
           const result = await dispatch(login(values));
           if (result.meta.requestStatus == "fulfilled") {
-            alert("Success");
+            navigate("/stock");
           }
         })}
       >
