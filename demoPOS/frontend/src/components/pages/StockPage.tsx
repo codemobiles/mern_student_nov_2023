@@ -17,6 +17,7 @@ export default function StockPage() {
       renderCell({ value }) {
         return (
           <img
+            alt="product image"
             src={"http://localhost:8081/images/" + value}
             className="w-[50px]"
           />
