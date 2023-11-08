@@ -3,6 +3,7 @@ import { Products } from "../entity/Products";
 import { AppDataSource } from "../data-source";
 import formidable = require("formidable");
 import { firstValues } from "formidable/src/helpers/firstValues.js";
+import { generateSeq, getFileName, uploadImage } from "../utils/cm-util";
 
 export class ProductController {
   private productRepo = AppDataSource.getMongoRepository(Products);
