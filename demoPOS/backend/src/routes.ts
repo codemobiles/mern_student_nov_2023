@@ -1,3 +1,4 @@
+import { ProductController } from "./controller/ProductController";
 import { UserController } from "./controller/UserController";
 
 export const Routes = [
@@ -13,5 +14,12 @@ export const Routes = [
     route: "login",
     controller: UserController,
     action: "login",
+  },
+
+  {
+    method: "get",
+    route: "product",
+    controller: ProductController,
+    action: "all",
   },
 ];
