@@ -25,7 +25,7 @@ export default function StockPage({}: Props) {
       StockPage
       <ul>
         {stockReducer.stockAllResult.map((e) => (
-          <li>{e.name}</li>
+          <li key={e._id}>{e.name}</li>
         ))}
       </ul>
     </div>
