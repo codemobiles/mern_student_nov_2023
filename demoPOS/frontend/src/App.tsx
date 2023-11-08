@@ -14,6 +14,8 @@ import StockCreatePage from "./components/pages/StockCreatePage";
 import StockEditPage from "./components/pages/StockEditPage";
 import StockPage from "./components/pages/StockPage";
 import TransactionPage from "./components/pages/TransactionPage";
+import { useSelector } from "react-redux";
+import { authSelector } from "./store/slices/authSlice";
 
 const drawerWidth = 240;
 
@@ -69,6 +71,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
+  const authReducer = useSelector(authSelector);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -81,8 +84,12 @@ export default function PersistentDrawerLeft() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      {false && <Header open={open} handleDrawerOpen={handleDrawerOpen} />}
-      {false && <Menu open={open} handleDrawerClose={handleDrawerClose} />}
+      {authReducer.isAuthented && (
+        <Header open={open} handleDrawerOpen={handleDrawerOpen} />
+      )}
+      {authReducer.isAuthented && (
+        <Menu open={open} handleDrawerClose={handleDrawerClose} />
+      )}
       <Main open={open}>
         <DrawerHeader />
         <Routes>
