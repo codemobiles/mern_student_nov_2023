@@ -13,7 +13,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { authSelector, remove } from "@/store/slices/authSlice";
+import { authSelector, register, remove } from "@/store/slices/authSlice";
 import { useAppDispatch } from "@/store/store";
 
 const formValidateSchema = Yup.object().shape({
@@ -55,11 +55,11 @@ const RegisterPage = () => {
       <form
         noValidate
         onSubmit={handleSubmit(async (values) => {
-          const result = await axios.post(
-            "http://localhost:8081/api/v2/register",
-            values
-          );
-          alert(JSON.stringify(result.data));
+          const result = await dispatch(register(values));
+          if (register.fulfilled.match(result)) {
+            alert("Register successfully");
+            navigate("/login");
+          }
         })}
       >
         {/* Username */}
