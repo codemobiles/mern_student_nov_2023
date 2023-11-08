@@ -1,23 +1,43 @@
-import { Box, Stack, Typography } from "@mui/material";
-import React from "react";
+import { Grid, Typography } from "@mui/material";
+import Card from "@mui/material/Card";
 
-type Props = {
+type StockCardProps = {
   icon: any;
   title: string;
   subtitle: string;
   color: string;
 };
 
-export default function StockCard(props: Props) {
+const StockCard = (props: StockCardProps) => {
   return (
-    <Stack direction="row">
-      <Stack direction="column">
-        <Typography variant="body1">{props.title}</Typography>
-        <Typography variant="body1">{props.subtitle}</Typography>
-      </Stack>
-      <Box color={props.color}>
-        <props.icon />
-      </Box>
-    </Stack>
+    <Card elevation={7}>
+      <Grid container className="min-h-[70px]">
+        <Grid item className="flex-grow h-[100px] p-2">
+          <Typography variant="h5" color="textPrimary">
+            {props.title}
+          </Typography>
+          <Typography variant="h6" color="textSecondary">
+            {props.subtitle}
+          </Typography>
+        </Grid>
+
+        <Grid
+          item
+          style={{
+            backgroundColor: props.color,
+            color: "white",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minWidth: 70,
+          }}
+        >
+          <props.icon fontSize="large" />
+          {/* {React.createElement(props.icon, { fontSize: "large" })} */}
+        </Grid>
+      </Grid>
+    </Card>
   );
-}
+};
+
+export default StockCard;
