@@ -224,7 +224,7 @@ const Stock = () => {
             size="large"
             onClick={() => {
               setSelectedProduct(row);
-              // handleCopy((row as Product).name);
+              handleCopy((row as Product).name);
             }}
           >
             <CopyAll fontSize="inherit" />
