@@ -51,6 +51,6 @@ export const data = {
   ],
 };
 
-export function App() {
+export default function ReportPage() {
   return <Bar options={options} data={data} />;
 }
