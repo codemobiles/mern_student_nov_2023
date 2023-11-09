@@ -132,12 +132,13 @@ const Stock = () => {
       field: "image",
       width: 80,
       renderCell: ({ value }: GridRenderCellParams) => (
-        <img
-          onClick={() => setOpenDemoDialog(true)}
-          alt=""
-          src={`${imageUrl}/images/${value}?dummy=${Math.random()}`}
-          className="w-[70px] h-[70px] rounded-[5%]"
-        />
+        <Button onClick={() => setOpenDemoDialog(true)}>
+          <img
+            alt=""
+            src={`${imageUrl}/images/${value}?dummy=${Math.random()}`}
+            className="w-[70px] h-[70px] rounded-[5%]"
+          />
+        </Button>
       ),
     },
     {
