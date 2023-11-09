@@ -7,14 +7,17 @@ import {
   Title,
   Tooltip,
   Legend,
+  LineElement,
+  PointElement,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import faker from "faker";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend
@@ -52,5 +55,5 @@ export const data = {
 };
 
 export default function ReportPage() {
-  return <Bar options={options} data={data} />;
+  return <Line options={options} data={data} />;
 }
