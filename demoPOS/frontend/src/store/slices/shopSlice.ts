@@ -1,5 +1,8 @@
 import { Product } from "@/types/product.type";
-import { TransactionResponse } from "@/types/transaction.type";
+import {
+  TransactionRequest,
+  TransactionResponse,
+} from "@/types/transaction.type";
 import { server } from "@/utils/constants";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
@@ -45,10 +48,13 @@ const updateOrder = (state: ShopState, orderLines: Product[]) => {
   state.mTaxAmt = taxAmt;
 };
 
-export const submitPayment = createAsyncThunk("shop/submit", async (data) => {
-  const result = await httpClient.post(server.TRANSACTION_URL, data);
-  return result.data;
-});
+export const submitPayment = createAsyncThunk(
+  "shop/submit",
+  async (data: TransactionRequest) => {
+    const result = await httpClient.post(server.TRANSACTION_URL, data);
+    return result.data;
+  }
+);
 
 const shopSlice = createSlice({
   name: "shop",
