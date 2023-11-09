@@ -13,11 +13,11 @@ if (!process.env.ROOT_PATH) {
   exit(0);
 }
 
-var publicKEY = fs.readFileSync(
+const publicKEY = fs.readFileSync(
   path.join(process.env.ROOT_PATH + "/public.key"),
   "utf8"
 );
-var privateKEY = fs.readFileSync(
+const privateKEY = fs.readFileSync(
   path.join(process.env.ROOT_PATH + "/private.key"),
   "utf8"
 );
