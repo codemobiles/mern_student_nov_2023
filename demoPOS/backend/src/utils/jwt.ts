@@ -29,7 +29,7 @@ var a = "http://codemobiles.com"; // Audience (Domain within which this token wi
 export default {
   sign: (payload) => {
     // Token signing options
-    var signOptions = {
+    const signOptions = {
       issuer: i,
       subject: s,
       audience: a,
