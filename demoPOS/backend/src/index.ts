@@ -14,6 +14,22 @@ if (!process.env.ROOT_PATH) {
   exit(0);
 }
 
+const interceptor1 = (req: Request, res: Response, next: Function) => {
+  if (req.query.token1 == "1234") {
+    next();
+  } else {
+    res.end("no authoized 1");
+  }
+};
+
+const interceptor2 = (req: Request, res: Response, next: Function) => {
+  if (req.query.token2 == "5555") {
+    next();
+  } else {
+    res.end("no authoized 2");
+  }
+};
+
 AppDataSource.initialize()
   .then(async () => {
     // create express app
@@ -26,20 +42,8 @@ AppDataSource.initialize()
     Routes.forEach((route) => {
       (app as any)[route.method](
         "/api/v2" + route.route,
-        (req: Request, res: Response, next: Function) => {
-          if (req.query.token1 == "1234") {
-            next();
-          } else {
-            res.end("no authoized 1");
-          }
-        },
-        (req: Request, res: Response, next: Function) => {
-          if (req.query.token2 == "5555") {
-            next();
-          } else {
-            res.end("no authoized 2");
-          }
-        },
+        interceptor1,
+        interceptor2,
         (req: Request, res: Response, next: Function) => {
           const result = new (route.controller as any)()[route.action](
             req,
