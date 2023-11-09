@@ -38,9 +38,8 @@ import dayjs from "dayjs";
 import { NumericFormat } from "react-number-format";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-// import useCopyToClipboard from "../../hooks/useCopyToClipboard";
 import StockCard from "@/components/fragments/StockCard";
-import useCopyToClipboard from "hooks/useCopyToClipboard";
+import useCopyToClipboard from "@/hooks/useCopyToClipboard";
 
 interface QuickSearchToolbarProps {
   clearSearch: () => void;
@@ -219,7 +218,9 @@ const Stock = () => {
             <Delete fontSize="inherit" />
           </IconButton>
           <IconButton
-            disabled={true && selectedProduct?.product_id === row.product_id}
+            disabled={
+              isCopied && selectedProduct?.product_id === row.product_id
+            }
             aria-label="copy"
             size="large"
             onClick={() => {
