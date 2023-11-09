@@ -15,9 +15,9 @@ export default function useCopyToClipboard(resetInterval: number) {
     };
   }, [isCopied, resetInterval]);
 
-  const handleCopy = (text: string) => {
+  const handleCopy = React.useCallback((text: string) => {
     copy(text);
     setCopied(true);
-  };
+  }, []);
   return [isCopied, handleCopy];
 }
