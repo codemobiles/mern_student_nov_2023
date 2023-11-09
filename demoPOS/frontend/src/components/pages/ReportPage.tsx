@@ -102,7 +102,9 @@ export default function ReportPage() {
       y: {
         ticks: {
           callback: function (value: any, _index: any, _values: any) {
-            return "฿" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return (
+              "บาท " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            );
           },
         },
       },
