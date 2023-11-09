@@ -76,7 +76,7 @@ const StockEdit = () => {
 
   useEffect(() => {
     reset(stockReducer.stockOneResult ?? initialValue);
-  }, [stockReducer.stockOneResult, reset]);
+  }, [stockReducer.stockOneResult, reset, initialValue]);
 
   const watchPreviewImage = watch("file_obj");
 
