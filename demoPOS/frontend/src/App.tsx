@@ -1,5 +1,10 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import {
+  ThemeProvider,
+  createTheme,
+  styled,
+  useTheme,
+} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
@@ -72,7 +77,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
-  const theme = useTheme();
+  const theme = createTheme({
+    spacing: 1,
+  });
   const [open, setOpen] = React.useState(true);
   const authReducer = useSelector(authSelector);
   const dispatch = useAppDispatch();
@@ -92,48 +99,50 @@ export default function PersistentDrawerLeft() {
   }, [dispatch]);
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      {authReducer.isAuthented && (
-        <Header open={open} handleDrawerOpen={handleDrawerOpen} />
-      )}
-      {authReducer.isAuthented && (
-        <Menu open={open} handleDrawerClose={handleDrawerClose} />
-      )}
+    <ThemeProvider theme={theme}>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        {authReducer.isAuthented && (
+          <Header open={open} handleDrawerOpen={handleDrawerOpen} />
+        )}
+        {authReducer.isAuthented && (
+          <Menu open={open} handleDrawerClose={handleDrawerClose} />
+        )}
 
-      {!authReducer.isAuthenticating && (
-        <Main open={open}>
-          <DrawerHeader />
-          <Routes>
-            {/** Wrap all Route under PublicRoutes element */}
-            <Route
-              path="/"
-              element={<PublicRoutes isAuthented={authReducer.isAuthented} />}
-            >
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/" element={<Navigate to="/login" />} />
-              <Route path="*" element={<Navigate to="/login" />} />
-            </Route>
-            {/* Protected routes */}
-            <Route
-              path="/"
-              element={
-                <ProtectedRoutes isAuthented={authReducer.isAuthented} />
-              }
-            >
-              <Route path="/shop" element={<ShopPage />} />
-              <Route path="/stock" element={<StockPage />} />
-              <Route path="/report" element={<ReportPage />} />
-              <Route path="/stock/create" element={<StockCreatePage />} />
-              <Route path="/stock/edit/:id" element={<StockEditPage />} />
-              <Route path="/report" element={<ReportPage />} />
-              <Route path="/transaction" element={<TransactionPage />} />
-              {/* <Route path="/chartjs" element={<ChartJSFaker />} /> */}
-            </Route>
-          </Routes>
-        </Main>
-      )}
-    </Box>
+        {!authReducer.isAuthenticating && (
+          <Main open={open}>
+            <DrawerHeader />
+            <Routes>
+              {/** Wrap all Route under PublicRoutes element */}
+              <Route
+                path="/"
+                element={<PublicRoutes isAuthented={authReducer.isAuthented} />}
+              >
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="*" element={<Navigate to="/login" />} />
+              </Route>
+              {/* Protected routes */}
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoutes isAuthented={authReducer.isAuthented} />
+                }
+              >
+                <Route path="/shop" element={<ShopPage />} />
+                <Route path="/stock" element={<StockPage />} />
+                <Route path="/report" element={<ReportPage />} />
+                <Route path="/stock/create" element={<StockCreatePage />} />
+                <Route path="/stock/edit/:id" element={<StockEditPage />} />
+                <Route path="/report" element={<ReportPage />} />
+                <Route path="/transaction" element={<TransactionPage />} />
+                {/* <Route path="/chartjs" element={<ChartJSFaker />} /> */}
+              </Route>
+            </Routes>
+          </Main>
+        )}
+      </Box>
+    </ThemeProvider>
   );
 }

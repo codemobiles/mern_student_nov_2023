@@ -90,7 +90,7 @@ const Transaction = () => {
 
   return (
     <Paper className="p-8">
-      <Typography variant="h3" sx={{ mb: 10 }}>
+      <Typography variant="h3" sx={{ mb: 15 }}>
         Transaction
       </Typography>
       <Grid container spacing={2} className="h-[80vh]">
