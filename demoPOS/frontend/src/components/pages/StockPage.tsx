@@ -109,6 +109,7 @@ const Stock = () => {
   const navigate = useNavigate();
 
   const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [openDemoDialog, setOpenDemoDialog] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<Product>();
   const [value, setValue] = useDebounce("", 300);
 
@@ -284,11 +285,15 @@ const Stock = () => {
     );
   };
 
+  const handleCloseDemoDialog = () => {
+    setOpenDemoDialog(false);
+  };
+
   const showDemoDialog = () => {
     return (
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={openDemoDialog}
+        onClose={handleCloseDemoDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -302,8 +307,8 @@ const Stock = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleCloseDemoDialog}>Disagree</Button>
+          <Button onClick={handleCloseDemoDialog} autoFocus>
             Agree
           </Button>
         </DialogActions>
