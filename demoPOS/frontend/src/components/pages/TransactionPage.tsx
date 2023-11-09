@@ -15,12 +15,12 @@ import { NumericFormat } from "react-number-format";
 import { useSelector } from "react-redux";
 
 const Transaction = () => {
-  const dispatch = useAppDispatch();
-  const shopReducer = useSelector(shopSelector);
+  // const dispatch = useAppDispatch();
+  // const shopReducer = useSelector(shopSelector);
 
-  useEffect(() => {
-    dispatch(getTransactions());
-  }, [dispatch, shopReducer]);
+  // useEffect(() => {
+  //   dispatch(getTransactions());
+  // }, [dispatch, shopReducer]);
 
   return (
     <Paper className="p-8">
