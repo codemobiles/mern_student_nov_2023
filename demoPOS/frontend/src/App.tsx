@@ -24,6 +24,8 @@ import { authSelector, relogin } from "./store/slices/authSlice";
 import PublicRoutes from "@/router/public.routes";
 import ProtectedRoutes from "@/router/protected.routes";
 import { useAppDispatch } from "./store/store";
+import backgroundMenuImage from "@/assets/images/background_menu.jpg";
+import { blue } from "@mui/material/colors";
 
 const drawerWidth = 240;
 
@@ -77,18 +79,46 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+  // https://mui.com/customization/default-theme/
   const theme = createTheme({
     components: {
       MuiButton: {
         styleOverrides: {
           root: {
-            borderRadius: 20,
+            borderRadius: 30,
+          },
+        },
+      },
+      MuiDrawer: {
+        styleOverrides: {
+          paper: {
+            backgroundImage: `url(${backgroundMenuImage})`,
+            backgroundRepeat: "no-repeat",
+            backgroundColor: "#f2fcff",
+            backgroundPosition: "bottom",
+            width: drawerWidth,
           },
         },
       },
     },
     spacing: 8,
+    typography: {
+      fontFamily: "Chakra Petch",
+      // fontFamily: "Roboto",
+      fontWeightLight: 100,
+      fontWeightRegular: 400,
+      fontWeightMedium: 500,
+      fontWeightBold: 600,
+    },
+    palette: {
+      primary:
+        import.meta.env.VITE_IS_PRODUCTION === "1" ? { main: "#0096d3" } : blue,
+      background: {
+        default: "#B8F4FF33",
+      },
+    },
   });
+
   const [open, setOpen] = React.useState(true);
   const authReducer = useSelector(authSelector);
   const dispatch = useAppDispatch();
