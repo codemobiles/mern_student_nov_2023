@@ -4,12 +4,12 @@ import copy from "copy-to-clipboard";
 export default function useCopyToClipboard(
   resetInterval: number
 ): [isCopied: boolean, handleCopy: (text: string) => void] {
-  const [isCopied, setCopied] = React.useState(false);
+  const [isCopied, setIsCopied] = React.useState(false);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     if (isCopied && resetInterval) {
-      timeout = setTimeout(() => setCopied(false), resetInterval);
+      timeout = setTimeout(() => setIsCopied(false), resetInterval);
     }
 
     return () => {
@@ -19,7 +19,7 @@ export default function useCopyToClipboard(
 
   const handleCopy = React.useCallback((text: string) => {
     copy(text);
-    setCopied(true);
+    setIsCopied(true);
   }, []);
   return [isCopied, handleCopy];
 }
