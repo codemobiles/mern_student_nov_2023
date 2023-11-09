@@ -27,7 +27,8 @@ AppDataSource.initialize()
       (app as any)[route.method](
         "/api/v2" + route.route,
         (req: Request, res: Response, next: Function) => {
-          next();
+          // next();
+          res.end("no authoized");
         },
         (req: Request, res: Response, next: Function) => {
           const result = new (route.controller as any)()[route.action](
