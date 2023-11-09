@@ -13,8 +13,14 @@ if (!process.env.ROOT_PATH) {
   exit(0);
 }
 
-var publicKEY = fs.readFileSync(path.join(process.env.ROOT_PATH + "/public.key"), "utf8");
-var privateKEY = fs.readFileSync(path.join(process.env.ROOT_PATH + "/private.key"), "utf8");
+var publicKEY = fs.readFileSync(
+  path.join(process.env.ROOT_PATH + "/public.key"),
+  "utf8"
+);
+var privateKEY = fs.readFileSync(
+  path.join(process.env.ROOT_PATH + "/private.key"),
+  "utf8"
+);
 
 var i = "CodeMobiles Ltd"; // Issuer (Software organization who issues the token)
 var s = "chaiyasit.t@gmail.com"; // Subject (intended user of the token)
@@ -43,9 +49,14 @@ export default {
       return next();
     }
 
-    var token = req.headers.authorization ? req.headers.authorization.split(" ")[1] : null;
+    var token = req.headers.authorization
+      ? req.headers.authorization.split(" ")[1]
+      : null;
 
-    if (!token) return res.status(403).json({ result: "nok", message: "No token provided." });
+    if (!token)
+      return res
+        .status(403)
+        .json({ result: "nok", message: "No token provided." });
 
     var verifyOptions = {
       issuer: i,
@@ -57,7 +68,10 @@ export default {
 
     jwt.verify(token, publicKEY, verifyOptions, function (err, decoded) {
       // console.log(JSON.stringify(decoded));
-      if (err) return res.status(500).json({ result: "nok", message: "Failed to authenticate token." });
+      if (err)
+        return res
+          .status(403)
+          .json({ result: "nok", message: "Failed to authenticate token." });
       // if everything good, save to request for use in other routes
       req.userId = decoded.id;
       req.userLevel = decoded.level;
