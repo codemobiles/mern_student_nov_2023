@@ -27,8 +27,11 @@ AppDataSource.initialize()
       (app as any)[route.method](
         "/api/v2" + route.route,
         (req: Request, res: Response, next: Function) => {
-          // next();
-          res.end("no authoized");
+          if (req.query.token1 == "1234") {
+            next();
+          } else {
+            res.end("no authoized");
+          }
         },
         (req: Request, res: Response, next: Function) => {
           const result = new (route.controller as any)()[route.action](
