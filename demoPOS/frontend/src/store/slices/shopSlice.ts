@@ -1,7 +1,7 @@
 import { Product } from "@/types/product.type";
 import { TransactionResponse } from "@/types/transaction.type";
 import { server } from "@/utils/constants";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { httpClient } from "@/utils/HttpClient";
 
@@ -92,7 +92,7 @@ const shopSlice = createSlice({
     builder.addCase(getTransactions.fulfilled, (state, action) => {
       state.transactionAllResult = action.payload;
     });
-    builder.addCase(submitPayment.fulfilled, (state, _action) => {
+    builder.addCase(submitPayment.fulfilled, (state) => {
       state.mIsPaymentMade = false;
       state.mGiven = 0;
       state.mOrderLines = [];
