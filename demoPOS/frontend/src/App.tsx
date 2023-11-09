@@ -78,7 +78,16 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const theme = createTheme({
-    spacing: 1,
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: 20,
+          },
+        },
+      },
+    },
+    spacing: 8,
   });
   const [open, setOpen] = React.useState(true);
   const authReducer = useSelector(authSelector);
