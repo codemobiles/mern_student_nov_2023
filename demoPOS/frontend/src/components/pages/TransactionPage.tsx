@@ -1,7 +1,36 @@
-import React from "react";
+import { getTransactions, shopSelector } from "@/store/slices/shopSlice";
+import { useAppDispatch } from "@/store/store";
+import { imageUrl } from "@/utils/constants";
+import { Avatar, Grid, Paper, Stack, Typography } from "@mui/material";
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridRowId,
+} from "@mui/x-data-grid";
+import dayjs from "dayjs";
+import "dayjs/locale/th";
+import { useEffect, useState } from "react";
+import { NumericFormat } from "react-number-format";
+import { useSelector } from "react-redux";
 
-type Props = {};
+const Transaction = () => {
+  const dispatch = useAppDispatch();
+  const shopReducer = useSelector(shopSelector);
 
-export default function TransactionPage({}: Props) {
-  return <div>TransactionPage</div>;
-}
+  useEffect(() => {
+    dispatch(getTransactions());
+  }, [dispatch, shopReducer]);
+
+  return (
+    <Paper className="p-8">
+      <ul>
+        <li>xxxx</li>
+        <li>xxxx</li>
+        <li>xxxx</li>
+      </ul>
+    </Paper>
+  );
+};
+
+export default Transaction;
