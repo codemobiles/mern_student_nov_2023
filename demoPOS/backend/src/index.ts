@@ -4,6 +4,7 @@ import { AppDataSource } from "./data-source";
 import { Routes } from "./routes";
 import * as cors from "cors";
 import { exit } from "process";
+import { interceptor1, interceptor2 } from "./utils/my-interceptor";
 
 // Check ROOT_PATH
 console.log("echo $ROOT_PATH: " + process.env.ROOT_PATH);
