@@ -5,11 +5,29 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { httpClient } from "@/utils/HttpClient";
 
+export interface ShopState {
+  transactionAllResult: TransactionResponse[];
+  mOrderLines: Product[];
+  mTotalPrice: number;
+  mTaxAmt: number;
+  mIsPaymentMade: boolean;
+  mGiven: number;
+}
+
+const initialState: ShopState = {
+  transactionAllResult: [],
+  mOrderLines: [],
+  mTotalPrice: 0,
+  mTaxAmt: 0,
+  mIsPaymentMade: false,
+  mGiven: 0,
+};
+
 const shopSlice = createSlice({
   name: "shop",
   initialState: initialState,
   reducers: {
-    addOrder: (state, action: PayloadAction<Product>) => {
+    addOrder: (state, action) => {
       const product = action.payload;
       const index = state.mOrderLines.findIndex((item) => {
         return item._id === product._id;
@@ -22,7 +40,7 @@ const shopSlice = createSlice({
       }
       updateOrder(state, state.mOrderLines);
     },
-    removeOrder: (state, action: PayloadAction<Product>) => {
+    removeOrder: (state, action) => {
       const product = action.payload;
       const orderLines = state.mOrderLines;
       const foundIndex = orderLines.findIndex(
@@ -38,7 +56,7 @@ const shopSlice = createSlice({
       orderLines.splice(foundIndex, 1);
       updateOrder(state, orderLines);
     },
-    togglePayment: (state, _action: PayloadAction<void>) => {
+    togglePayment: (state) => {
       state.mIsPaymentMade = !state.mIsPaymentMade;
       state.mGiven = 0;
     },
