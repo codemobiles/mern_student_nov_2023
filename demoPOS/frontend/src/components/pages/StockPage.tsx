@@ -376,6 +376,7 @@ const Stock = () => {
         }}
       />
       {showDialog()}
+      {showDemoDialog()}
     </Box>
   );
 };
