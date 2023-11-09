@@ -40,7 +40,7 @@ const updateOrder = (state: ShopState, orderLines: Product[]) => {
   let totalPrice = 0;
   let taxAmt = 0;
   for (const item of orderLines) {
-    totalPrice += item.price * item.qty;
+    totalPrice += item.price * (item.qty ?? 0);
   }
   taxAmt = totalPrice * 0.07;
   state.mOrderLines = orderLines;

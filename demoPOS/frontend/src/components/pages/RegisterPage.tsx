@@ -11,7 +11,6 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { authSelector, register, remove } from "@/store/slices/authSlice";
 import { useAppDispatch } from "@/store/store";
