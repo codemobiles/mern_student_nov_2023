@@ -40,6 +40,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 // import useCopyToClipboard from "../../hooks/useCopyToClipboard";
 import StockCard from "@/components/fragments/StockCard";
+import useCopyToClipboard from "hooks/useCopyToClipboard";
 
 interface QuickSearchToolbarProps {
   clearSearch: () => void;
@@ -102,9 +103,8 @@ function QuickSearchToolbar(props: QuickSearchToolbarProps) {
   );
 }
 
-
 const Stock = () => {
-  // const [isCopied, handleCopy] = useCopyToClipboard(500);
+  const [isCopied, handleCopy] = useCopyToClipboard(500);
   const stockReducer = useSelector(stockSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
