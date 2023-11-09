@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import copy from "copy-to-clipboard";
 
-export default function useCopyToClipboard(resetInterval: number): any {
+export default function useCopyToClipboard(
+  resetInterval: number
+): [isCopied: boolean, handleCopy: (text: string) => void] {
   const [isCopied, setCopied] = React.useState(false);
 
   useEffect(() => {
