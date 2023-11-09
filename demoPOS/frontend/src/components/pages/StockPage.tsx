@@ -102,6 +102,7 @@ function QuickSearchToolbar(props: QuickSearchToolbarProps) {
   );
 }
 
+
 const Stock = () => {
   // const [isCopied, handleCopy] = useCopyToClipboard(500);
   const stockReducer = useSelector(stockSelector);
