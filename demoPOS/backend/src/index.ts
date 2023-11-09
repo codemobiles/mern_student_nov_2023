@@ -27,6 +27,9 @@ AppDataSource.initialize()
       (app as any)[route.method](
         "/api/v2" + route.route,
         (req: Request, res: Response, next: Function) => {
+          next();
+        },
+        (req: Request, res: Response, next: Function) => {
           const result = new (route.controller as any)()[route.action](
             req,
             res,

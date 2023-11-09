@@ -33,7 +33,7 @@ export const getTransactions = createAsyncThunk(
   }
 );
 
-const updateOrder = (state: ShopState, orderLines: any) => {
+const updateOrder = (state: ShopState, orderLines: Product[]) => {
   let totalPrice = 0;
   let taxAmt = 0;
   for (const item of orderLines) {
