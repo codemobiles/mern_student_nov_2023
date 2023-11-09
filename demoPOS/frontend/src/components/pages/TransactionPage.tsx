@@ -26,7 +26,9 @@ const Transaction = () => {
     <Paper className="p-8">
       <ul>
         {shopReducer.transactionAllResult.map((e) => (
-          <li key={e.transaction_id}>{e.total}</li>
+          <li key={e.transaction_id}>
+            {e.transaction_id},{e.total},{e.buyer_id}
+          </li>
         ))}
       </ul>
     </Paper>
