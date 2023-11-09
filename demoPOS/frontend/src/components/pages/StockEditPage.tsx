@@ -1,34 +1,26 @@
-// import React from "react";
-// import { useMatch } from "react-router-dom";
-
-// type Props = {};
-
-// export default function StockEditPage({}: Props) {
-//   const match = useMatch("/stock/edit/:id");
-
-//   return <div>StockEditPage {match?.params.id ?? "unknown"}</div>;
-// }
-
-import { Box, Button, TextField } from "@mui/material";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link, useMatch, useNavigate } from "react-router-dom";
 import {
-  addProduct,
+  editProduct,
   getProductById,
   stockSelector,
 } from "@/store/slices/stockSlice";
 import { useAppDispatch } from "@/store/store";
 import { Product } from "@/types/product.type";
+import { imageUrl } from "@/utils/constants";
 
 import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { Box, TextField } from "@mui/material";
+
+const initialValue: Product = { name: "", price: 0, stock: 0 };
 
 const formValidateSchema = Yup.object().shape({
   name: Yup.string().required("Name is required").trim(),
@@ -37,10 +29,10 @@ const formValidateSchema = Yup.object().shape({
 });
 
 const StockEdit = () => {
-  const stockReducer = useSelector(stockSelector);
+  const match = useMatch("/stock/edit/:id");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const match = useMatch("/stock/edit/:id");
+  const stockReducer = useSelector(stockSelector);
 
   useEffect(() => {
     if (match?.params.id) {
@@ -48,25 +40,13 @@ const StockEdit = () => {
     }
   }, [dispatch, match?.params.id]);
 
-  const onSubmit = async (values: Product) => {
-    const formData = new FormData();
-    formData.append("name", values.name);
-    formData.append("price", String(values.price));
-    formData.append("stock", String(values.stock));
-    formData.append("image", values.file);
-    const result = await dispatch(addProduct(formData));
-    if (addProduct.fulfilled.match(result)) {
-      navigate("/stock");
-    }
-  };
-
-  const initialValue: Product = { name: "", price: 1500, stock: 9999 };
   const {
     control,
     handleSubmit,
+    getValues,
     setValue,
-    watch,
     reset,
+    watch,
     formState: { errors },
   } = useForm<Product>({
     defaultValues: initialValue,
@@ -76,9 +56,26 @@ const StockEdit = () => {
 
   useEffect(() => {
     reset(stockReducer.stockOneResult ?? initialValue);
-  }, [stockReducer.stockOneResult, reset, initialValue]);
+  }, [stockReducer.stockOneResult, reset]);
 
   const watchPreviewImage = watch("file_obj");
+
+  const onSubmit = async (values: Product) => {
+    const formData = new FormData();
+    formData.append("id", String(values.product_id));
+    formData.append("name", values.name);
+    formData.append("price", String(values.price));
+    formData.append("stock", String(values.stock));
+    if (values.file) {
+      formData.append("image", values.file);
+    }
+
+    dispatch(editProduct(formData)).then((result: any) => {
+      if (editProduct.fulfilled.match(result)) {
+        navigate("/stock");
+      }
+    });
+  };
 
   const showForm = () => {
     return (
@@ -90,59 +87,66 @@ const StockEdit = () => {
             </Typography>
 
             <Controller
-              control={control}
               name="name"
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Name"
-                  error={Boolean(errors.name?.message)}
-                  helperText={errors.name?.message?.toString()}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  autoFocus
-                />
-              )}
-            />
+              control={control}
+              render={({ field }) => {
+                return (
+                  <TextField
+                    {...field}
+                    label="Name"
+                    error={Boolean(errors.name?.message)}
+                    helperText={errors.name?.message?.toString()}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    autoFocus
+                  />
+                );
+              }}
+            ></Controller>
 
             <Controller
-              control={control}
               name="price"
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Price"
-                  type="number"
-                  error={Boolean(errors.price?.message)}
-                  helperText={errors.price?.message?.toString()}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  autoFocus
-                />
-              )}
-            />
+              control={control}
+              render={({ field }) => {
+                return (
+                  <TextField
+                    {...field}
+                    label="Price"
+                    error={Boolean(errors.price?.message)}
+                    helperText={errors.price?.message?.toString()}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    type="number"
+                    fullWidth
+                    autoFocus
+                  />
+                );
+              }}
+            ></Controller>
 
             <Controller
-              control={control}
               name="stock"
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  type="number"
-                  label="Stock"
-                  error={Boolean(errors.stock?.message)}
-                  helperText={errors.stock?.message?.toString()}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  autoFocus
-                />
-              )}
-            />
-
-            <Box>{showPreviewImage()}</Box>
+              control={control}
+              render={({ field }) => {
+                return (
+                  <TextField
+                    {...field}
+                    label="Stock"
+                    error={Boolean(errors.stock?.message)}
+                    helperText={errors.stock?.message?.toString()}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    type="number"
+                    fullWidth
+                    autoFocus
+                  />
+                );
+              }}
+            ></Controller>
 
             <TextField
               className="mt-4"
@@ -154,6 +158,7 @@ const StockEdit = () => {
                 setValue("file_obj", URL.createObjectURL(e.target.files[0])); // for preview image
               }}
             />
+            <Box>{showPreviewImage(getValues("image"))}</Box>
           </CardContent>
           <CardActions>
             <Button
@@ -163,7 +168,7 @@ const StockEdit = () => {
               type="submit"
               className="mr-2"
             >
-              Create
+              Edit
             </Button>
             <Button
               fullWidth
@@ -180,9 +185,13 @@ const StockEdit = () => {
     );
   };
 
-  const showPreviewImage = () => {
+  const showPreviewImage = (image: string | undefined) => {
     if (watchPreviewImage) {
       return <img alt="" src={watchPreviewImage} className="h-[100px]" />;
+    } else if (image) {
+      return (
+        <img alt="" src={`${imageUrl}/images/${image}`} className="h-[100px]" />
+      );
     }
   };
 
