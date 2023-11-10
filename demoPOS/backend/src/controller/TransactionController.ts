@@ -19,6 +19,12 @@ export class TransactionController {
           as: "staff",
         },
       },
+      { $unwind: "$staff" },
+      {
+        $project: {
+          "staff.password": 0,
+        },
+      },
     ]);
     return result.toArray();
   }
