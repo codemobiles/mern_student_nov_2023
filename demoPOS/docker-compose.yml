@@ -26,6 +26,17 @@ services:
     depends_on:
       - database
     
+  # frontend 
+  frontend:
+    image: frontend
+    build:
+      context: frontend/
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 81:80
+
 
 volumes:
   cmreact-volume:
