@@ -11,6 +11,14 @@ export class TransactionController {
     const result = this.transRepo.aggregate([
       { $match: { total: { $lt: 600 } } },
       { $match: { total: { $gt: 200 } } },
+      {
+        $lookup: {
+          from: "users",
+          localField: "staff_id",
+          foreignField: "_id",
+          as: "staff",
+        },
+      },
     ]);
     return result.toArray();
   }
