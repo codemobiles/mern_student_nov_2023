@@ -25,6 +25,11 @@ export class TransactionController {
           "staff.password": 0,
         },
       },
+      {
+        $addFields: {
+          staff_id: "$staff.username",
+        },
+      },
     ]);
     return result.toArray();
   }
