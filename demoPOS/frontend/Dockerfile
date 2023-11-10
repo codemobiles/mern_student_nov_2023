@@ -1,11 +1,21 @@
-FROM node:lts-alpine
-ENV NODE_ENV=production
+# command to build 
+# docker build -t react_frontend . 
+# docker run --rm -p 1152:80 --name reactfrontend react_frontend
+# docker-compose up -d
+FROM node:lts-alpine AS builder
 WORKDIR /usr/src/app
-COPY package.json ./
-COPY package-lock.json* ./
-RUN npm install --production --silent && mv node_modules ../
+
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
-EXPOSE 3000
-RUN chown -R node /usr/src/app
-USER node
-CMD ["npm", "start"]
+
+RUN npm run build
+
+# https://hub.docker.com/_/mongo
+# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
+FROM nginx:stable-alpine
+COPY src/nginx.conf /etc/nginx/nginx.conf
+WORKDIR /usr/share/nginx/html
+COPY --from=builder /usr/src/app/dist/ .1
