@@ -9,7 +9,8 @@ export class TransactionController {
 
   all_demo(req: Request, res: Response, next: NextFunction) {
     const result = this.transRepo.aggregate([
-      { $match: { total: { $lt: 1000 } } },
+      { $match: { total: { $lt: 600 } } },
+      { $match: { total: { $gt: 200 } } },
     ]);
     return result.toArray();
   }
