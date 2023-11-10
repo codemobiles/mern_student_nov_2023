@@ -8,7 +8,10 @@ export class TransactionController {
   private transRepo = AppDataSource.getMongoRepository(Transactions);
 
   all_demo(req: Request, res: Response, next: NextFunction) {
-    return this.transRepo.find();
+    const result = this.transRepo.aggregate([
+      { $match: { total: { $lt: 1000 } } },
+    ]);
+    return result.toArray();
   }
 
   async all(req: Request, res: Response, next: NextFunction) {
