@@ -71,6 +71,12 @@ const productRoutes = [
 const transactionRoutes = [
   {
     method: "get",
+    route: "/transaction_demo",
+    controller: TransactionController,
+    action: "all_demo",
+  },
+  {
+    method: "get",
     route: "/transaction",
     controller: TransactionController,
     action: "all",
