@@ -8,29 +8,36 @@ export class TransactionController {
   private transRepo = AppDataSource.getMongoRepository(Transactions);
 
   all_demo(req: Request, res: Response, next: NextFunction) {
-    const result = this.transRepo.aggregate([
-      { $match: { total: { $lt: 600 } } },
-      { $match: { total: { $gt: 200 } } },
-      {
-        $lookup: {
-          from: "users",
-          localField: "staff_id",
-          foreignField: "_id",
-          as: "staff",
+    const result = this.transRepo
+      .aggregate([
+        { $match: { total: { $lt: 600 } } },
+        { $match: { total: { $gt: 200 } } },
+        {
+          $lookup: {
+            from: "users",
+            localField: "staff_id",
+            foreignField: "_id",
+            as: "staff",
+          },
         },
-      },
-      { $unwind: "$staff" },
-      {
-        $project: {
-          "staff.password": 0,
+        { $unwind: "$staff" },
+        {
+          $project: {
+            "staff.password": 0,
+          },
         },
-      },
-      {
-        $addFields: {
-          staff_id: "$staff.username",
+        {
+          $addFields: {
+            staff_id: "$staff.username",
+          },
         },
-      },
-    ]);
+        {
+          $project: {
+            staff: 0,
+          },
+        },
+      ])
+      .sort({ timestamp: -1 });
     return result.toArray();
   }
 
